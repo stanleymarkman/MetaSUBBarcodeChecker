@@ -21,7 +21,6 @@ def main():
 
     print(box)
 
-    #cv2.drawContours(image, [box], -1, (0, 255, 0), 3)
 
     cropped = crop_minAreaRect(image, box)
     cropped = imutils.rotate_bound(cropped, -90)
@@ -37,7 +36,9 @@ def main():
     # perform a series of erosions and dilations
     closed = cv2.erode(closed, None, iterations = 2)
     closed = cv2.dilate(closed, None, iterations = 3)
+    print("PRESS ANY KEY TO CLOSE IMAGE")
     showImageWindow(closed)
+    print("PERFORMING OCR...")
     print(pytesseract.image_to_string(closed))
 
 
@@ -73,10 +74,13 @@ def attemptBoundingBox(image, blurFactor, threshold):
     c = sorted(cnts, key = cv2.contourArea, reverse = True)[0]
     # compute the rotated bounding box of the largest contour
     rect = cv2.minAreaRect(c)
-    return rect
 
-    #box = cv2.cv.BoxPoints(rect) if imutils.is_cv2() else cv2.boxPoints(rect)
-    #box = np.int0(box)
+    box = cv2.cv.BoxPoints(rect) if imutils.is_cv2() else cv2.boxPoints(rect)
+    box = np.int0(box)
+    cv2.drawContours(image, [box], -1, (0, 255, 0), 3)
+    showImageWindow(image)
+
+    return rect
 
 #Shows image at half size, waits for any keystroke
 def showImageWindow(im):
