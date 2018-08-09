@@ -1,0 +1,3 @@
+[submodule "metasub2017-kobo-api-wrapper"]
+	path = metasub2017-kobo-api-wrapper
+	url = https://github.com/bwellington/metasub2017-kobo-api-wrapper
