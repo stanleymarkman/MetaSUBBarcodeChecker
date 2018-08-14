@@ -14,7 +14,7 @@ def main():
 
     # load the image
     image = cv2.imread(args["image"])
-    
+
     #Attempt to create a bounding box using blur factor of 50 and threshold of 100
 
     box = attemptBoundingBox(image, 50, 90)
@@ -39,7 +39,7 @@ def main():
     print("PRESS ANY KEY TO CLOSE IMAGE")
     showImageWindow(closed)
     print("PERFORMING OCR...")
-    print(pytesseract.image_to_string(closed))
+    print(pytesseract.image_to_string(closed, config='--psm 11'))
 
 
 def attemptBoundingBox(image, blurFactor, threshold):
